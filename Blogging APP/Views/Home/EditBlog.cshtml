@@ -1,0 +1,115 @@
+﻿@model Blogging_APP.Models.BlogPost
+
+@{
+    ViewData["Title"] = "Edit Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #0e1a2b;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+        background-color: #ffc107;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 48px;
+        font-weight: bold;
+        color: #000;
+        margin: 0;
+    }
+
+    .header p {
+        font-size: 18px;
+        color: #222;
+        margin-top: 5px;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #1b2b3a;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(255, 193, 7, 0.2);
+    }
+
+    .form-group label {
+        color: #ffc107;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .form-control:focus {
+        outline: 2px solid #ffc107;
+        background-color: #34495e;
+    }
+
+    .btn-submit {
+        background-color: transparent;
+        color: white;
+        border: 2px solid #ffc107;
+        padding: 12px 20px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #ffc107;
+        color: #000;
+        cursor: pointer;
+    }
+</style>
+
+<div class="header">
+    <h1>Edit Blog</h1>
+    <p>Update and Improve Your Post</p>
+</div>
+
+<div class="form-container">
+    <form asp-action="EditBlog" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Category"></label>
+            <input asp-for="Category" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Tags"></label>
+            <input asp-for="Tags" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content" class="form-control" rows="6"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Save Changes</button>
+    </form>
+</div>

@@ -1,0 +1,198 @@
+﻿@model List<Blogging_APP.Models.BlogPost>
+
+@{
+    ViewData["Title"] = "Blog";
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0D1B2A;
+        color: #FFFFFF;
+    }
+
+    .hero {
+        background-color: #FFC300;
+        color: #000;
+        padding: 60px 40px;
+        text-align: left;
+    }
+
+        .hero h1 {
+            font-size: 64px;
+            margin: 0;
+            font-weight: bold;
+            display: inline;
+        }
+
+        .hero span {
+            font-size: 20px;
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+    .admin-controls {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .admin-controls a {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .admin-controls a:hover {
+                background-color: #b02a37;
+            }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 40px;
+    }
+
+    .blog-card {
+        background-color: #1B263B;
+        border-radius: 12px;
+        overflow: hidden;
+        width: 280px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        position: relative;
+    }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+    .tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #FFC300;
+        color: #000;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+
+    .blog-content {
+        padding: 20px;
+    }
+
+    .blog-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #FFC300;
+    }
+
+    .read-more {
+        background-color: transparent;
+        color: #FFF;
+        border: 1px solid #FFC300;
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+        .read-more:hover {
+            background-color: #FFC300;
+            color: #000;
+        }
+
+    .delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .delete-btn:hover {
+            background-color: #b02a37;
+        }
+
+    .create-btn {
+        margin: 30px auto 0;
+        display: flex;
+        justify-content: center;
+    }
+
+        .create-btn a {
+            background-color: #FFC300;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .create-btn a:hover {
+                background-color: #d4a900;
+            }
+
+</style>
+
+<div class="hero">
+    <h1>MIXED</h1>
+    <span>Exploring A Tapestry Of Topics And Ideas</span>
+</div>
+
+@if (userRole == "Admin")
+{
+    <div class="admin-controls">
+        <a asp-action="ManageBlogs">Manage Blogs</a>
+    </div>
+}
+
+<div class="create-btn">
+    <a asp-action="CreateBlog">Create New Blog</a>
+</div>
+
+<div class="card-container">
+    @foreach (var blog in Model)
+    {
+        <div class="blog-card">
+            <span class="tag">@blog.Category</span>
+            <img src="https://source.unsplash.com/400x300/?@blog.Category" alt="@blog.Category">
+            <div class="blog-content">
+                <div class="blog-title">@blog.Title</div>
+                <a asp-action="ReadBlog" asp-route-id="@blog.Id" class="read-more">Read More</a>
+
+                @if (userRole == "Admin")
+                {
+                    <form asp-action="DeleteBlog" asp-route-id="@blog.Id" method="post" style="display:inline;">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                }
+            </div>
+        </div>
+    }
+</div>

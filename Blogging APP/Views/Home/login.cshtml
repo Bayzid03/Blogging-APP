@@ -1,0 +1,74 @@
+﻿@model Blogging_APP.Models.Login
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="d-flex align-items-center justify-content-center vh-100" style="background: linear-gradient(135deg, #f3e7fe, #e3fdfd);">
+    <div class="card shadow-lg border-0" style="width: 900px; border-radius: 20px; overflow: hidden;">
+        <div class="row g-0">
+            <!-- Image Section -->
+            <div class="col-md-6" style="background: url('https://static.vecteezy.com/system/resources/previews/028/241/446/non_2x/screen-technology-background-use-the-login-to-access-the-system-it-is-a-illustration-designed-to-look-modern-and-hi-tech-suitable-for-work-related-to-technology-vector.jpg') no-repeat center center; background-size: cover; position: relative;">
+                <div class="text-white position-absolute bottom-0 p-4" style="background: rgba(0, 0, 0, 0.5); border-top-right-radius: 20px;">
+                    <h4>The journey to success starts here!</h4>
+                </div>
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-6 bg-blue p-5">
+                <div class="text-center mb-4">
+                    <img src="~/images/" alt="Logo" class="mb-3">
+                    <h3 class="text-primary">Welcome Back!</h3>
+                    <p class="text-muted">New to Blink? <a href="/Home/Registration" class="text-decoration-none text-primary">Create an account.</a></p>
+                </div>
+                <!-- Validation Summary -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <form method="post" asp-action="Login">
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control border-secondary" id="email" placeholder="Enter your email" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input asp-for="Password" type="password" class="form-control border-secondary" id="password" placeholder="Enter your password" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">👁️</button>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <!-- Remember Me and Forgot Password -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember for 30 days</label>
+                        </div>
+                        <a href="#" class="text-decoration-none text-primary">Forgot password?</a>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #ff7eb3, #ff758c); border: none;">Sign in</button>
+                    </div>
+                    <hr>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="bi bi-google"></i> Sign in with Google</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    }
+</script>
+
+

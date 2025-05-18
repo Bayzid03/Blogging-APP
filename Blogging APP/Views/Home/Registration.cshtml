@@ -1,0 +1,58 @@
+﻿@model Blogging_APP.Models.Registration
+
+@{
+    ViewData["Title"] = "Registration Page";
+}
+
+<div class="d-flex align-items-center justify-content-center vh-100" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+    <div class="card shadow-lg border-0" style="width: 800px; border-radius: 20px; overflow: hidden;">
+        <div class="row g-0">
+            <!-- Image Section -->
+            <div class="col-md-6" style="background: url('https://th.bing.com/th/id/OIP.3D2C453aGycYkk0pSlfiqgHaE7?w=249&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center center; background-size: cover;">
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-6 bg-dark text-white p-5">
+                <h3 class="text-center mb-4">Registration Info</h3>
+                <!-- Validation Summary -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <form method="post" asp-action="Registration">
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input asp-for="Username" class="form-control bg-dark text-white border-secondary" id="username" placeholder="Enter your username">
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control bg-dark text-white border-secondary" id="email" placeholder="Enter your email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control bg-dark text-white border-secondary" id="password" placeholder="Enter your password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <!-- Role -->
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Select Role</label>
+                        <select asp-for="Role" class="form-select bg-dark text-white border-secondary" id="role">
+                            <option value="">-- Select Role --</option>
+                            <option value="Reader">Reader</option>
+                            <option value="Author">Author</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

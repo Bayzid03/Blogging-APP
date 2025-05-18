@@ -1,0 +1,135 @@
+﻿@model List<Blogging_APP.Models.BlogPost>
+
+@{
+    ViewData["Title"] = "Manage Blogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #0f1b2c;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+    }
+
+    .header {
+        background-color: #ffc107;
+        padding: 25px 40px;
+        text-align: left;
+    }
+
+        .header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+            color: #000;
+            display: inline-block;
+        }
+
+        .header span {
+            font-size: 18px;
+            font-weight: 500;
+            margin-left: 10px;
+            color: #222;
+        }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        background-color: #182133;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #ddd;
+    }
+
+    th, td {
+        padding: 14px 18px;
+        border-bottom: 1px solid #2c354a;
+        text-align: left;
+    }
+
+    th {
+        background-color: #ffc107;
+        color: #000;
+        font-weight: 600;
+    }
+
+    tr:hover {
+        background-color: #202b3f;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        border: 1px solid #ffc107;
+        background-color: transparent;
+        color: #ffc107;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 4px;
+        transition: 0.3s;
+    }
+
+        .btn:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+    .no-data {
+        background-color: #182133;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        text-align: center;
+        color: #ccc;
+        font-size: 18px;
+        margin-top: 40px;
+    }
+</style>
+
+<div class="header">
+    <h2>Manage Blogs</h2>
+    <span>View, Edit, or Delete Your Blog Posts</span>
+</div>
+
+<div class="container">
+    @if (Model.Count == 0)
+    {
+        <div class="no-data">
+            No blog posts available.
+        </div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var blog in Model)
+                {
+                    <tr>
+                        <td>@blog.Title</td>
+                        <td>@blog.Category</td>
+                        <td>@blog.Tags</td>
+                        <td>
+                            <a asp-controller="Home" asp-action="EditBlog" asp-route-id="@blog.Id" class="btn">Edit</a>
+                            <a asp-action="DeleteBlog" asp-route-id="@blog.Id" class="btn" onclick="return confirm('Are you sure you want to delete this blog?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
