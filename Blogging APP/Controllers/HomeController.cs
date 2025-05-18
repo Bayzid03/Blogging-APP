@@ -233,7 +233,7 @@ Blog content:
 {request.Content}";
 
 
-        string apiKey = "AIzaSyB1BMdHNLP26OEZwVpglYK-Z2xz1V3AtzU";
+        string apiKey = "";
 
         string response = await CallGeminiAPI(prompt, apiKey);
         var parts = ParseResponse(response);
